@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+
+<script>
+	function validateLogInForm()
+	{
+		var user = document.forms["LogIn"]["user"].value;
+		if(user == null || user == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var Pass = document.forms["LogIn"]["pass"].value;
+		if(Pass == null || Pass == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+	}
+	function validateSignUpForm()
+	{
+		var Fname = document.forms["SignUp"]["Fname"].value;
+		if(Fname == null || Fname == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var Sname = document.forms["SignUp"]["Sname"].value;
+		if(Sname == null || Sname == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var Add1 = document.forms["SignUp"]["Add1"].value;
+		if(Add1 == null || Add1 == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var Add2 = document.forms["SignUp"]["Add2"].value;
+		if(Add2 == null || Add2 == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var City = document.forms["SignUp"]["city"].value;
+		if(City == null || City == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var Pcode = document.forms["SignUp"]["pcode"].value;
+		if(Pcode == null || Pcode == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var Tele = document.forms["SignUp"]["tele"].value;
+		if(Tele == null || Tele == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}else{
+			if(/^\d+$/.test(Tele) == false){
+				alert("Invalid Character")
+				return false;
+			}
+		}
+		var Email = document.forms["SignUp"]["email"].value;
+		if(Email == null || Email == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var User = document.forms["SignUp"]["user"].value;
+		if(User == null || User == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var pass = document.forms["SignUp"]["pass"].value;
+		if(pass == null || pass == ""){
+			alert("Firstname must be filled out");
+			return false;
+		}
+		var cpass = document.forms["SignUp"]["cpass"].value;
+		if(cpass == null || cpass == "" || cpass != pass){
+			alert("Passwords dont match");
+			return false;
+		}
+	}
+	
+	
+</script>
+
+<?PHP
+
+	include('connection.php');
+	
+	$username = $_POST['user'];
+	$Email = $_POST['email'];
+	$password = $_POST['pass'];
+	$title = $_POST['title'];
+	$fname = $_POST['fname'];
+	$sname = $_POST['sname'];
+	$add1 = $_POST['add1'];
+	$add2 = $_POST['add2'];
+	$city = $_POST['city'];
+	$pcode = $_POST['pcode'];
+	$tel = $_POST['Tele'];
+
+	$clientquery = "INSERT INTO regtable('Username', 'EmailAddress', 'Password', 'Title', 'Firstname', 'Surname', 'Address1', 'Address2', 'City', 'Postcode', 'Telephone') VALUES ($username, $Email, $password, $title, $fname, $sname, $add1, $add2, $city, $pcode, $tel))";
+	mysql_query($clientquery) or die('Error with users');
+	
+	error_log('There was an error updating the client registration', 0);
+	
+	echo "Thank you for registering with Journey to the past";
+	
+?><br /><br />
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Contact - Journey to the past</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<div class="clearfix">
+			<div class="logo">
+				<a href="index.html"><img src="images/logo.png" alt="LOGO" height="52" width="362"></a>
+			</div>
+			<ul class="navigation">
+				<li>
+					<a href="index.html">Home</a>
+				</li>
+				<li>
+					<a href="about.html">About</a>
+				</li>
+				<li>
+					<a href="team.html">Meet the Team</a>
+				</li>
+				<li>
+					<a href="purchase.html">Purchase</a>
+				</li>
+				<li>
+					<a href="contact.html">Contact</a>
+				</li>
+                <li class="active">
+                	<a href="log-in.html">Log In</a>
+                </li>
+			</ul>
+		</div>
+	</div>
+	<div id="contents">
+		<div class="clearfix">
+			<div class="main">
+            	<h1>Log In</h1>
+				<form name="LogIn" method="post" class="LogIn" onSubmit="return validateLogInForm()" action="log-in.html">
+					<label>Username</label>
+					<input type="text" name="user" id="user" placeholder="Enter Username" tabindex="1">
+					<label>Password</label>
+					<input type="text" name="pass" id="pass" placeholder="Enter Password" tabindex="2">
+					<input type="submit" value="Log in" tabindex="3">
+				</form>
+                <br>
+				<h1>Sign Up</h1>
+				<form name="SignUp" method="post" class="LogIn" onSubmit="return validateSignUpForm()" action="log-in.html">
+                	<label>Title</label>
+                    <select name="title" tabindex="4">
+  						<option value="Mr">Mr</option>
+  						<option value="Mrs">Mrs</option>
+						<option value="Miss">Miss</option>
+					</select>
+					<label>Firstname</label>
+					<input type="text" name="Fname" id="Fname" placeholder="Enter Firstname" tabindex="5">
+                    <label>Surname</label>
+					<input type="text" name="Sname" id="Sname" placeholder="Enter Surname" tabindex="6">
+                    <label>Address line 1</label>
+					<input type="text" name="Add1" id="Add1" placeholder="Enter Address line 1" tabindex="7">
+                    <label>Address line 2</label>
+					<input type="text" name="Add2" id="Add2" placeholder="Enter Address line 2" tabindex="8">
+                    <label>City</label>
+					<input type="text" name="city" id="city" placeholder="Enter City" tabindex="9">
+                    <label>Postcode</label>
+					<input type="text" name="pcode" id="pcode" placeholder="Enter Postcode" tabindex="10">
+                   	<label>Telephone</label>
+					<input type="text" name="tele" id="tele" placeholder="Enter Telephone number" tabindex="11">
+					<label>Email Address</label>
+					<input type="text" name="email" id="email" placeholder="Enter Email Address" tabindex="12">
+                    <label>Username</label>
+					<input type="text" name="user" id="user" placeholder="Enter Username" tabindex="13">
+					<label>Password</label>
+					<input type="text" name="pass" id="pass" placeholder="Enter Password" tabindex="14">
+                    <label>Confirm Password</label>
+					<input type="text" name="cpass" id="cpass" placeholder="Confirm Password" tabindex="15">
+					<input type="submit" value="Sign Up" tabindex="16">
+                    
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="clearfix">
+			<div class="section">
+				<h4>Latest News</h4>
+			</div>
+			<div class="section contact">
+				<h4>Contact Us</h4>
+				<p>
+					<span>Address:</span>24 Oakmore road
+				</p>
+				<p>
+					<span>Phone:</span>01782 269487
+				</p>
+				<p>
+					<span>Email:</span>JourneyToThePast@gmail.com
+				</p>
+			</div>
+			<div class="section">
+				<h4>SEND US A MESSAGE</h4>
+			</div>
+		</div>
+		<div id="footnote">
+			<div class="clearfix">
+				<p>
+					© Copyright 2015 Journey to the Past.
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
